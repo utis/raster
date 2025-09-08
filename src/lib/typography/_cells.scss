@@ -1,0 +1,62 @@
+@mixin cells-internal ($grid, $break, $c, $r, $from-left, $to-right, $from-top, $to-bottom,
+                       $margins, $container) {
+    @if $c {
+        $w: grid-width($grid, $c);
+        width: $w * 1rem;
+    }
+    
+    @if $r {
+        $h: grid-height($grid, $r);
+        height: $h * 1rem;
+    }
+    
+    @if $margins or $from-left or $to-bottom {
+        $left: grid-gutter-width($grid);
+        $bottom: grid-gutter-height($grid);
+
+        // Containers, if they contain elements with left margins,
+        // need a gutter width less. FIXME???
+        // @if $container {
+        //     $left: 0;
+        // }
+        
+        @if $from-left {
+            $left: $left + grid-width($grid, $from-left);
+        }
+
+        @if $to-bottom {
+            $bottom: 2 * $bottom + grid-height($grid, $to-bottom);
+        }
+
+        @if $to-right {
+            margin-right: grid-width($grid, $to-right) + grid-gutter-height($grid) * 1rem;
+        }
+
+        // Set margins only if height or width respectively have been
+        // changed.
+
+        @if $from-left or ($margins and $c and not ($margins == only-vertical)) {
+            margin-left: $left * 1rem;
+        }
+        @if $to-bottom or ($margins and $r and not ($margins == only-horizontal)) {
+            margin-bottom: $bottom * 1rem;
+        }
+    }
+    
+}
+
+@mixin cells ($grid: $default-grid, $break: false, $c: false, $r: false,
+              $from-left: false, $to-right: false, $from-top: false, $to-bottom: false,
+              $margins: true, $container: false) {
+    @if $break {
+        @include grid-respond-to ($grid, $break) {
+            @include cells-internal ($grid, $break, $c, $r,
+                                     $from-left, $to-right, $from-top, $to-bottom,
+                                     $margins, $container);
+        }
+    } @else {
+        @include cells-internal ($grid, $break, $c, $r,
+                                 $from-left, $to-right, $from-top, $to-bottom,
+                                 $margins, $container);
+    }
+}

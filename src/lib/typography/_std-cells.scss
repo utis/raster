@@ -1,0 +1,8 @@
+.from-left-6-2 {
+    @include cells ($default-grid, 6, $from-left: 2, $container: true);
+}
+
+%to-bottom-3-1 {
+    @include cells ($default-grid, 3, $to-bottom: 1);
+}
+

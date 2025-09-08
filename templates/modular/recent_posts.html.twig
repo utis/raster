@@ -1,0 +1,18 @@
+<section class="recent-posts">
+  <h2 class="recent-posts__headline">{{ page.title }}</h2>
+  {% for p in page.find('/posts').children.order('date', 'desc').slice(0, 5) %}
+    {# {% set bannerimage = p.media['banner.jpg'] %} #}
+    <div class="recent-post">
+      {# {% if bannerimage %} #}
+      {#   <div class="recent-post-image">{{ bannerimage.cropZoom(60,60).quality(60) }}</div> #}
+      {# {% else %} #}
+    {#   <div class="recent-post-image"><img src="{{ url('theme://images/logo.png') }}" width="60" height="60"></div> #}
+    {# {% endif %} #}
+      <div class="recent-post__txt">
+        <h2 class="recent-post__title"><a href="{{p.url}}">{{ p.title }}</a></h2>
+	<div class="recent-post__summary">{{ p.summary }}</div>
+        <div class="recent-post__date">{{ p.date|date("j. M Y")}}</div>
+      </div>
+    </div>
+  {% endfor %}
+</section>

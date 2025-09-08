@@ -1,0 +1,8 @@
+@import 'sct-one-img';
+@import 'sct-four-img';
+@import 'sct-txt';
+
+.sct-title {
+    @extend %grid-element;
+    @include cells ($default-grid, 2, $c: 2, $r: 1);
+}

@@ -1,0 +1,21 @@
+enabled: true
+production: false
+dropdown:
+  enabled: true
+
+typography:
+  fonts:
+    - lato
+    - noto
+  fonts-dir: fonts
+  grids:
+    default:
+      face: afasdfnoto-serif
+      root-size: 20
+      font-size: .8
+      line-height: 1
+      column-width: 9
+      row-height: 6
+      min-h-margins: 1
+      gutter-width: 1
+      gutter-height: 1

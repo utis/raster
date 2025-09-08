@@ -1,0 +1,43 @@
+name: Basis
+slug: basis
+type: theme
+version: 0.1.0
+description: Basis-Theme als Grundlage.
+icon: rebel
+author:
+  name: Oliver Utis
+  email: oliver.utis@denkbar-ffm.de
+homepage: https://github.com/oliver-utis/grav-theme-basis
+demo: http://demo.yoursite.com
+keywords: grav, theme, etc
+bugs: https://github.com/oliver-utis/grav-theme-basis/issues
+readme: https://github.com/oliver-utis/grav-theme-basis/blob/develop/README.md
+license: MIT
+
+dependencies:
+  - { name: grav, version: '>=1.6.0' }
+  - { name: 'gtypo', version:: '>=0.1.0' }
+
+form:
+    validation: loose
+    fields:
+        dropdown.enabled:
+            type: toggle
+            label: Dropdown in Menu
+            highlight: 1
+            default: 1
+            options:
+                1: PLUGIN_ADMIN.ENABLED
+                0: PLUGIN_ADMIN.DISABLED
+            validate:
+                type: bool
+        production:
+            type: toggle
+            label: Production Mode
+            highlight: 1
+            default: 1
+            options:
+                1: PLUGIN_ADMIN.ENABLED
+                0: PLUGIN_ADMIN.DISABLED
+            validate:
+                type: bool

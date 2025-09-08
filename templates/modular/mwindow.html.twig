@@ -1,0 +1,21 @@
+{%spaceless%}
+    <script>
+     window.addEventListener('scroll', () => {
+         document.body.style.setProperty('--scroll',window.pageYOffset / (document.body.offsetHeight - window.innerHeight));
+     }, false);
+    </script>
+    <section class="mwindow mwindow-{{ page.currentPosition }}">
+        {% set reflection = page.header.mwindow.reflection 
+        ? page.header.mwindow.reflection
+        : 'baum-default' %}
+
+        <div class="mwindow-img">
+            {{ page.media|first.cropZoom(grid_width(2, true), grid_height(5, true)).html(false, false, 'mwindow-behind')|raw }}
+
+            {{ media['theme://img/' ~ reflection ~ '.jpg'].cropZoom(grid_width(2, true), grid_height(7, true)).html(false, false, 'mwindow-reflection')|raw }}
+        </div>
+        <!-- <img class="mwindow-reflection" src={{ url("theme://img/" ~ reflection ~ '.jpg') }}> -->
+        {#{ img.cropZoom(grid_width(2, true), grid_height(5, true)).grayscale.html | raw }#}
+        <div class="mwindow-txt txt">{{ page.content|raw }}</div>
+    </section>
+{%endspaceless%}

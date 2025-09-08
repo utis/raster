@@ -1,0 +1,21 @@
+{% block content_toggle %}data-link-toggle="content-grid--show-grid"{% endblock %}
+
+<script>
+    var ua = navigator.userAgent;
+    if (/Safari/.test(ua) && ! /Chrome/.test(ua)) {
+	window.addEventListener("load", function() {
+	    var elt = document.getElementById("grid-notification");
+	    elt.innerHTML = "Hinweis: Webkit-basierte Browser, wie Safari, zeigen minimale Abweichungen vom Raster, die sich allmählich summieren. Diese sind aber mit dem bloßen Auge nicht erkennbar.";
+	}, false);
+    }
+</script>
+
+<div id="grid-notification" class="grid-notification"
+     data-link-toggle="grid-notification--visible">
+</div>
+
+{% include 'partials/changing-link.html.twig' with
+{'show_text': 'Raster anzeigen',
+'hide_text': 'Raster verbergen',
+'class_name': 'grid-toggle',
+'target_ids': 'content-grid grid-notification'} %}

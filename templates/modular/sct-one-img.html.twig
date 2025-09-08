@@ -1,0 +1,32 @@
+{%spaceless%}
+    <div class="sct-one-img sct-one-img--{{ page.currentPosition }} sct-one-img--{{ page.slug }} {{ page.header.section.classes }}">
+        {% if page.header.section.display_title %}
+            <div class="sct-one-img__title sct-title txt"><h2>{{ page.title }}</h2></div>
+        {% endif %}
+
+
+        {% set img = page.media|first %}
+
+        {% if img.extension == "svg" %}
+            <div class="sct-one-img__svg">
+                {{ file_contents(img.path ~ '/' ~ img.filename) | raw }}
+            </div>
+        {% else %}
+            <div class="sct-one-img__img">
+                {#{ dump(grid_width(2, true)) }#}
+                {#{ dump(config.theme.config) }#}
+                {#{ dump(grid_height(2, true)) }#}
+                {#{ dump("--- here ---") }#}
+                {#{ dump(img) }#}
+                {{ img.cropZoom(grid_width(2, true), grid_height(2, true)).grayscale.html | raw }}
+                <!-- <picture>
+                     <source media="(min-width: 820px)" srcset="https://picsum.photos/id/27/380/255"
+                     <source media="(min-width: 620px)" srcset="https://picsum.photos/id/37/380/050">
+                     <source media="(max-width: 620px)" srcset="https://picsum.photos/id/237/380/100">
+                     <img src="https://picsum.photos/id/23/120/120">
+                     </picture> -->
+            </div>
+        {% endif %}
+        <div class="sct-one-img__txt txt">{{ page.content | raw }}</div>
+    </div>
+{%endspaceless%}

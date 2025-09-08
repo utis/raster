@@ -1,0 +1,74 @@
+@import 'dist-defaults';
+
+// $fonts-dir: '/user/themes/basis/src/lib/font-humanist/';
+// @import 'font-humanist/font-humanist';
+// $default-face: $font-humanist;
+
+// @import 'font-noto/font-noto-serif';
+// $default-face: $font-noto-serif;
+
+// @import 'font-lato/font-lato';
+// $default-face: $font-lato;
+
+$fonts-dir: '/user/themes/basis/src/lib/font-jost/';
+@import 'font-jost/font-jost';
+
+$default-face: $font-jost;
+
+
+$debug-grid: true;
+
+
+// .header { display: none; }
+
+$logo-font-size: 3rem;
+
+@import 'typography/typography';
+
+@import 'typography/std-page';
+
+@import 'mdl/sections';
+
+// .title { display: none; }
+
+svg {
+    overflow: visible;
+}
+
+.title {
+    @extend %grid-element;
+    @include cells($default-grid, 2, $r: 1);
+}
+
+$line-height: 1;
+// @import 'spectre/variables';
+// @import 'spectre/mixins/shadow';
+// @import 'spectre/menus';
+// @import 'spectre/navbar';
+
+
+nav li {
+    display: inline-block;
+}
+
+a.logo {
+    @extend %not-a-normal-link;
+}
+
+
+.main-header {
+    @extend %to-bottom-3-1;
+}
+
+.logo {
+    font-weight: bold;
+    @include cells($default-grid, 2, $c: 3);
+}
+
+.main-nav {
+    @include cells($default-grid, 6, $c: 3);
+}
+
+.sct-one-img--0 .sct-title {
+    @include cells($default-grid, 6, $to-right: 2);
+}

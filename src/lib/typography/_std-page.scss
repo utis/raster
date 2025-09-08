@@ -1,0 +1,56 @@
+$page-margin-top: 3rem !default;
+$page-margin-bottom: $page-margin-top * 2 !default;
+
+$use-auto-kerning: true !default;
+
+$debug-grid: false !default;
+$debug-lines: $debug-grid !default;
+$debug-header-grid: $debug-grid !default;
+
+@import 'show-grid';
+@import 'std-header';
+@import 'std-cells';
+
+html {
+    font-size: grid-root-size($default-grid) * 1px;
+    font-family: grid-face-family($default-grid);
+}
+
+body {
+    margin: 0;
+    margin-top: $page-margin-top;
+    margin-bottom: $page-margin-bottom;
+
+    line-height: grid-line-height($default-grid) * 1rem;
+    font-size: grid-font-size($default-grid) * 1rem;
+
+    hyphens: auto;
+    font-feature-settings: 'kern', 'onum', 'liga';
+    text-rendering: optimizeLegibility;
+    
+    @if $use-auto-kerning {
+        font-kerning: auto;
+    }
+    @if $debug-lines {
+        @include show-lines($default-grid);
+    }
+}
+
+.grid {
+    @extend %grid-page;
+}
+
+#main {
+    @include grid-responsive-page-widths($default-grid);
+    @if $debug-grid {
+        // @include show-lines-and-grid($default-grid);
+        @include show-grid($default-grid);
+    }
+    margin: 0 auto;
+    // FIXME: Naming of ID.
+    // margin: 0 auto;
+    // @if $debug-grid {
+    //     @include show-grid($default-grid);
+    // }
+}
+

@@ -1,0 +1,68 @@
+@function is-int($n) {
+    @return round($n) == $n;
+}
+
+@mixin paragraph ($grid: $default-grid, $fsize: false, $lheight: false, $bottom: 1, $top: 0, $face: false, $left: false) {
+    // @if not $fsize {
+    //     $fsize: grid-font-size($grid);
+    // }
+
+    @if $lheight {
+        line-height: $lheight * 1rem;
+    } @else {
+        $lheight: grid-line-height($grid);
+    }
+
+    $lcorr: 0;
+    $mod: $lheight % grid-line-height($grid);
+    @if not is-int($mod) {
+        // For line-heights that are not multiples of 1, we need to
+        // push the element further down to the document's baseline.
+        $lcorr: grid-line-height($grid) - $mod;
+    }
+
+    @if $fsize {
+        font-size: $fsize * 1rem;
+        $bl: grid-baseline-correction($grid, $fsize, $lheight, $face);
+
+        // We do "baseline correction" for the default font by
+        // assuming the that the page's underlying baseline grid is by
+        // that amount moved upwards. In order for fonts larger or
+        // smaller than the default to appear on that virtual
+        // baseline, we have to add the default font's baseline
+        // correction.
+        $default-corr: grid-baseline-correction($grid);
+        $bl: $bl - $default-corr;
+
+
+        $top: $top + $bl;
+        $bottom: $bottom - $bl;
+    }
+
+    margin: 0;
+    padding-top: $top + $lcorr * 1rem;
+    margin-bottom: $bottom * 1rem;
+
+    @if $left {
+        margin-left: - $left * 1rem;
+    }
+
+    .txt > &:first-child {
+        @if $fsize {
+            $asc: grid-ascender-correction($grid, $fsize, $lheight, $face);
+
+            // Same as above for baseline correction:
+            $default-corr: grid-baseline-correction($grid);
+            $asc: $asc - $default-corr; // Is this right?
+
+            margin-top: - $asc * 1rem;
+            margin-bottom: $bottom + $asc * 1rem;
+        } @else {
+            // margin-top: - grid-ascender-correction($grid) * 1rem;
+        }
+    }
+
+    .txt > &:last-child {
+        margin-bottom: 0;
+    }
+}

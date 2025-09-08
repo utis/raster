@@ -1,0 +1,165 @@
+@import 'svg-uri/svg-uri';
+
+
+$show-grid-color: #b23f3f !default;
+
+@function make-grid-svg($width, $height, $gutter-width, $gutter-height) {
+
+    $total-width: $width + $gutter-width;
+    $total-height: $height + $gutter-height;
+
+    $svg: '<svg xmlns="http://www.w3.org/2000/svg" width="#{$total-width}" height="#{$total-height}">'
+    	  + '<rect style="fill:none;stroke:' + $show-grid-color + ';stroke-width:1;" '
+          + 'width="#{($width - 1)}" '
+          + 'height="#{($height - 1)}" '
+          + 'x="0.5" y="0.5" /></svg>';
+    @return svg-url($svg);
+}
+
+// $show-lines-color: #8282bb !default;
+
+$show-lines-color: lightsteelblue !default;
+$show-lines-size: 1px !default;
+
+// $baseline-grid: linear-gradient(to bottom, $show-lines-color 0, rgba(255, 255, 255, 0) 1px);
+// $show-grid-use-lines-gradient: false !default;
+
+// True if the baseline grid should appear lifted a little bit to fit
+// the characters.
+$show-grid-baseline-correction: true !default;
+
+@mixin show-lines ($grid: $default-grid, $yoff: false, $color: false, $raw: false) {
+    @include show-lines-and-grid($grid, $yoff: $yoff, $color: $color, $only: lines, $raw: $raw);
+}
+
+@mixin show-grid ($grid: $default-grid, $left: 0) {
+    @include show-lines-and-grid ($grid, $left: $left, $only: grid);
+}
+
+@mixin show-lines-and-grid ($grid: $default-grid, $left: 0, $only: false, $yoff: false, $color: false, $raw: false) {
+    $r: grid-root-size($grid) * 1px;
+
+    @if not $yoff {
+        $yoff: 0;
+    }
+
+    // @debug grid-baseline-correction($grid);
+    // @debug grid-ascender-correction($grid);
+    // @debug grid-descender-correction($grid);
+    // @debug "------------------------------";
+    // @debug grid-font-size($grid);
+
+    @if $show-grid-baseline-correction and ($yoff == 0) {
+        $yoff: - grid-baseline-correction($grid);
+    }
+    
+    $asc: grid-ascender-correction($grid);
+
+    $grid-yoff: 0;
+    @if $asc and $raw {
+        $grid-yoff: $asc * $r;
+    }
+
+    @if $asc and not $raw {
+        $yoff: $yoff - $asc;
+    }
+
+    // @debug $raw " --- " $yoff;
+
+    $lines-bg: make-lines-svg($r, $color);
+    $lines-scale: grid-line-height($grid) * $r;
+
+    $grid-width: grid-column-width($grid);
+    $gutter-width: grid-gutter-width($grid);
+    $grid-height: grid-row-height($grid);
+    $gutter-height: grid-gutter-height($grid);
+
+    $grid-bg: make-grid-svg($grid-width * $r, $grid-height * $r,
+                              $gutter-width * $r, $gutter-height * $r);
+
+    @if $only {
+        @if $only == lines {
+            background-image: $lines-bg;
+            background-repeat: repeat-y;
+            background-position: 0 $yoff * $r;
+            background-size: 100% $lines-scale;
+        } @else if $only == grid {
+            background-image: $grid-bg;
+            background-repeat: repeat;
+            background-position: $left $grid-yoff;
+            background-size: auto;
+        }
+    } @else {
+        background-image: $lines-bg, $grid-bg;
+        background-repeat: repeat-y, repeat;
+        background-position: $left $yoff * $r, $left $grid-yoff;
+        background-size: 100% $lines-scale, auto;
+    }
+}
+
+
+
+@function make-lines-svg($height, $color: false) {
+    @if not $color {
+        $color: $show-lines-color;
+    }
+
+  $svg: '<svg xmlns="http://www.w3.org/2000/svg" width="1px" height="#{$height}">'
+          + '<rect style="fill:#{$color};stroke:none;" '
+          + 'width="1px" height="1px" '
+          + 'x="0" y="#{($height - 1)}" /></svg>';
+  @return svg-url($svg);
+}
+
+
+// Alternative: Using gradients
+//
+// $debug-grid-color: red;
+// $debug-gline: 2;
+
+// .page {
+
+//   $height: $grid-height - $asc-corr - $desc-corr;
+//   $gheight: $gutter-height + $asc-corr + $desc-corr;
+
+//   $gradient1: linear-gradient(to bottom, $debug-grid-color 0,
+// 			      rgba(255, 255, 255, 0) $debug-gline * 1px);
+//   $size1: 100% ($height + $gheight);
+//   $pos1: 0 0;
+
+//   $gradient2: linear-gradient(to bottom, $debug-grid-color 0,
+// 			      rgba(255, 255, 255, 0) $debug-gline * 1px);
+//   $size2: 100% ($height + $gheight);
+//   $pos2: 0 $height;
+
+//   $width: $grid-width;
+//   $gwidth: $gutter-width;
+
+//   $gradient3: linear-gradient(to right, $debug-grid-color 0,
+// 			      rgba(255, 255, 255, 0) $debug-gline * 1px);
+//   $size3: ($width + $gwidth) 100%;
+//   $pos3: 0 0;
+
+//   $gradient4: linear-gradient(to right, $debug-grid-color 0,
+// 			      rgba(255, 255, 255, 0) $debug-gline * 1px);
+
+//   // We want our grid to have a finishing line on the
+//   // right side (looks better). For this, we need to
+//   // make the fourth gradient 1px smaller over the
+//   // the whole of it's columns. I.e. if there are
+//   // e. g. four columns, the width of gradient four
+//   // needs to be narrowed by 1/4 px.
+
+//   $columns: 3;
+//   $px-equiv: 1 / $rootsize;  // The rem equivalent of 1px.
+//   $width-adjust: $debug-gline * $px-equiv / $columns;
+//   $size4: ($width + $gwidth - $width-adjust) 100%;
+// //  $size4: ($width + $gwidth) 100%;
+//   $pos4: $width 0;
+
+//   background-image: $gradient1, $gradient2, $gradient3, $gradient4;
+//   background-repeat: repeat-y, repeat-y, repeat-x, repeat-x;
+//   background-position: $pos1, $pos2, $pos3, $pos4;
+//   background-size: $size1, $size2, $size3, $size4;
+//   z-index: 30;
+// }

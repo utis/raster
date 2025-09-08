@@ -1,0 +1,26 @@
+.sct-one-img__txt {
+  @extend %grid-element-strict;
+  @include cells ($default-grid, 2, $c: 2, $r: 2);
+  // @extend %grid-element-strict;
+  // @include grid-text(small, (columns: 2, rows: 2));
+  // @include grid-text(medium, (columns: 2, rows: 2, from-left: 1));
+  // @include grid-text(maximum, (columns: 2, rows: 2));
+}
+
+.sct-one-img__img, .sct-one-img__svg {
+    @include cells ($default-grid, 2, $c: 2, $r: 2);
+  // @extend %grid-element-strict;
+  // @include grid(small, (columns: 2, rows: 2));
+  // @include grid(medium, (columns: 2, rows: 2, from-left: 1));
+  // @include grid(maximum, (columns: 2, rows: 2));
+}
+
+.sct-one-img__svg {
+    @extend %grid-element-strict;
+    index: -10;
+}
+
+.sct-one-img__img {
+    background-color: grey;
+    @extend %grid-element-strict;
+}

@@ -1,0 +1,35 @@
+.sct-four-img__title {
+    @extend %grid-element;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+  // @include grid-text(small, (columns: 2, rows: 1));
+  // @include grid-text(medium, (columns: 2, rows: 1, from-left: 1));
+  // @include grid-text(maximum, (columns: 2, rows: 1, from-left: 2));
+  // h2 {
+  //   @extend %std-h1-bottom;
+  // }
+  // @include grid(maximum, (columns: 2, rows: 1, from-left: 2));
+}
+
+.sct-four-img__img {
+  @extend %grid-element-strict;
+  background-color: grey;
+  @include cells ($default-grid, 2, $c: 1, $r: 1);
+  @include cells ($default-grid, 3, $c: 1, $r: 2);
+
+  // @include grid(small, (columns: 1, rows: 1));
+  // @include grid(medium, (columns: 1, rows: 2));
+}
+
+.sct-four-img__txt {
+  @extend %grid-element;
+  @include cells ($default-grid, 2, $c: 2, $r: 2);
+
+  // @include grid-text(small, (columns: 2, rows: 2));
+  // @include grid-text(medium, (columns: 2, rows: 2));
+  // @include grid-text(maximum, (columns: 2, rows: 2, from-left: 2));
+  // @include grid-text(maximum, (columns: 2, rows: 2, from-left: 2));
+}
+
+

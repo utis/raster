@@ -1,0 +1,36 @@
+$font-humanist: (
+  font-family: 'Humanist777',
+  ascender-ratio: .32,
+  // ascender-ratio: .72,
+  //  descender-ratio: .78,
+  descender-ratio: -0.14,
+  // baseline-ratio: .68
+//  baseline-ratio: .78
+  baseline-ratio: .28
+);
+
+@font-face {
+    font-family: 'Humanist777';
+    src: url($fonts-dir + 'humanist-777-bt-webfont.woff2') format('woff2'),
+         url($fonts-dir + 'humanist-777-bt-webfont.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+
+}
+
+@font-face {
+    font-family: 'Humanist777';
+    src: url($fonts-dir + 'humanist_777_bold_bt-webfont.woff2') format('woff2'),
+         url($fonts-dir + 'humanist_777_bold_bt-webfont.woff') format('woff');
+    font-weight: bold;
+    font-style: normal;
+
+}
+
+@font-face {
+    font-family: 'Humanist777';
+    src: url($fonts-dir + 'humanist_777_italic_bt-webfont.woff2') format('woff2'),
+         url($fonts-dir + 'humanist_777_italic_bt-webfont.woff') format('woff');
+    font-weight: normal;
+    font-style: italic;
+}

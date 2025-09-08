@@ -1,0 +1,98 @@
+p {
+    @include paragraph ($default-grid);
+}
+
+h1 {
+    @include paragraph ($default-grid, 2.44, 4, $left: .165);
+}
+
+h2 {
+    @include paragraph ($default-grid, 1.95, 2, $left: .07);
+}
+
+h3 {
+    @include paragraph ($default-grid, 1.56, 2, $left: .04);
+}
+
+h4 {
+    @include paragraph ($default-grid, 1.25, 2, $left: .025);
+}
+
+h5 {
+    @include paragraph ($default-grid, 1, 2, $left: .016);
+}
+
+h6 {
+    @include paragraph ($default-grid, .8, 1, $left: .005);
+}
+
+
+p.xxlarge {
+    @include paragraph ($default-grid, 1.56, 2);
+}
+
+
+p.xlarge {
+    @include paragraph ($default-grid, 1.25, 2);
+}
+
+p.large {
+    @include paragraph ($default-grid, 1, 1 + 1/3);
+}
+
+
+p.xsmall {
+    @include paragraph ($default-grid, .6, .75);
+}
+
+// p.small {
+//     @include paragraph ($default-grid, .7, .75);
+// }
+
+p.small {
+    @include paragraph ($default-grid, .7);
+}
+
+
+$lh: 1rem * grid-line-height($default-grid);
+
+.notices {
+    padding: $lh $lh/2 $lh 1+$lh/2;
+    margin: $lh 0 $lh 0;
+}
+
+
+code {
+    // FIXME
+    display: inline-block;
+    height: 0;
+ }
+
+pre { margin: 0 0 $lh 0; }
+
+sup, sub, u, mark {
+    // FIXME
+    display: none;
+}
+
+li { 
+    margin: 0;
+    height: $lh; // FIXME
+ }
+
+blockquote {
+    margin: 0 0 $lh $lh * 2;
+}
+
+ul, ol {
+    margin: 0 0 $lh 0;
+}
+
+table, thead, tbody {
+    padding: 0;
+    margin: 0;
+}
+
+td {
+    height: 1rem;
+}

@@ -1,0 +1,81 @@
+{% set extension = config.theme.production ? '.min' : '' %}
+<!DOCTYPE html>
+<html lang="{{ (grav.language.getActive ?: grav.config.site.default_lang)|e }}">
+<head>
+    {% block head %}
+        <meta charset="utf-8" />
+        <title>{% if header.title %}{{ header.title|e }} | {% endif %}{{ site.title|e }}</title>
+
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        {% include 'partials/metadata.html.twig' %}
+
+        <link rel="icon" type="image/png" href="{{ url('theme://images/logo.png')|e }}" />
+        <link rel="canonical" href="{{ page.url(true, true)|e }}" />
+    {% endblock head %}
+
+    {% block stylesheets %}
+        {% if page.header.stylesheet %}
+            {% do assets.addCss('theme://css/' ~ page.header.stylesheet ~ extension ~ '.css', 1) %}
+        {% else %}
+            {#{ dump(url('theme://css/site.css')) }#}
+            {% do assets.addCss('theme://css/site' ~ extension ~ '.css', 1) %}
+        {% endif %}
+
+        {% if page.header.extrastyle %}
+            {% do assets.addCss('theme://css/' ~ page.header.extrastyle ~ extension ~ '.css', 1) %}
+        {% endif %}
+    {% endblock %}
+
+    {% block javascripts %}
+	    {% do assets.addJs('theme://js/main' ~ extension ~ '.js', 98) %}
+    {% endblock %}
+
+    {% block assets deferred %}
+    {{ assets.css()|raw }}
+    {{ assets.js()|raw }}
+    {% endblock %}
+</head>
+<body id="top" class="{{ page.header.body_classes|e }} {{ config.theme.production ?: 'debug-screens' }}">
+
+{% block header %}
+{%spaceless%}
+    <header class="main-header">
+        <div class="grid">
+            <a class="logo" href="{{ home_url|e }}">
+                <div class="logo-img">{{ file_contents("theme://img/logo.svg") | raw }}</div>
+
+                <div class="logo-txt">{{ config.site.title|e }}</div>
+            </a>
+            {% block header_navigation %}
+                <nav class="main-nav txt">
+                    {% include 'partials/navigation.html.twig' %}
+                </nav>
+            {% endblock %}
+        </div>
+    </header>
+{%endspaceless%}
+{% endblock %}
+
+{% block body %}
+    <section id="main">
+        <div class="grid">
+            {% block content %}{% endblock %}
+        </div>
+    </section>
+{% endblock %}
+
+{% block footer %}
+    <div class="footer text-center">
+        <div class="">
+            <p><a href="https://getgrav.org">Grav</a>, by <a href="https://trilby.media">Trilby Media, LLC</a>.</p>
+        </div>
+    </div>
+{% endblock %}
+
+{% block bottom %}
+    {{ assets.js('bottom')|raw }}
+{% endblock %}
+
+</body>
+</html>

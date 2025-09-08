@@ -1,0 +1,9 @@
+.sct-txt {
+    @extend %grid-element;
+    @include grid-respond-to ($default-grid, 4) {
+        column-count: 2;
+        column-gap: grid-gutter-width($default-grid);
+    }
+    @include cells($default-grid, 2);
+    @include cells($default-grid, 4, $c: 4, $r: 3);
+}

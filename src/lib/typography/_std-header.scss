@@ -1,0 +1,72 @@
+.main-header {
+
+    @include grid-responsive-page-widths($default-grid);
+    margin: 0 auto;
+    @include cells ($default-grid, 2, $r: 1, $margins: only-vertical);
+
+    @if $debug-header-grid {
+        @include show-grid ($default-grid);
+    }
+
+    ul {
+        white-space: nowrap;
+        margin: 0;
+        padding: 0;
+        display: flex;
+    }
+
+    li {
+        a {
+            @extend %not-a-normal-link;
+        }
+
+        display: inline-block;
+        margin: 0 1rem 0 0;
+        &:last-child {
+            margin-right: 0;
+        }
+
+
+        ul {
+            display: none; // FIXME
+        }
+    }
+}
+
+$logo-font-size: 3rem !default;
+$logo-face: $default-face !default;
+
+.logo-img {
+    // display: inline-block;
+    float: left;
+}
+
+.logo-txt {
+    // display: inline-block;
+    font-size: $logo-font-size;
+    line-height: $logo-font-size;
+    position: relative;
+    top: grid-ascender-correction($default-grid, $logo-font-size, $logo-font-size, $logo-face) * -1;
+
+}
+
+.logo {
+    @extend %grid-element;
+    @include cells($default-grid, 2, $c: 2);
+    svg {
+        height: grid-height($default-grid, 1) * 1rem;
+        margin-right: grid-gutter-width($default-grid) * 1rem;
+    }
+
+}
+
+.main-nav {
+    @extend %grid-element;
+    @include cells($default-grid, 6, $c: 4);
+    // @include cells ($default-grid, 2, $r: 1);
+
+    ul {
+        justify-content: right;
+    }
+}
+

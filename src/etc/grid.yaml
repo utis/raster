@@ -1,0 +1,13 @@
+face:
+  humanist: font-humanist
+
+grid:
+  default:
+    face: humanist
+    root-size: 16 * 1.25
+    font-size: .8
+    line-height: 1
+    column-width: 9
+    row-height: 6
+    gutter-width: 1
+    gutter-height: 1

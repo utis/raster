@@ -1,0 +1,39 @@
+@function grid-width-at-columns-px($grid, $c) {
+    $w: grid-width($grid, $c);
+
+    // Idea: if this were a list, there could be different minimum
+    // margins for every breakpoint.
+    $m: grid-min-h-margins($grid);
+    $r: grid-root-size($grid);
+
+    @return ($w + 2 * $m) * $r * 1px;
+}
+
+@mixin grid-respond-to ($grid, $break) {
+    $br: grid-breakpoints($grid);
+    @if $break == nth($br, 1) or not $break {
+        // No media query if $break is false or if it's the minimum
+        // breakpoint.
+        @content;
+    } @else if index($br, $break) {
+        $w: grid-width-at-columns-px($grid, $break);
+        @media screen and (min-width: $w) {
+            @content;
+        }
+    } @else {
+        @error 'Could not resolve breakpoint' $break;
+    }
+}
+
+@mixin grid-responsive-page-widths ($grid) {
+    $brs: grid-breakpoints($grid);
+    $min: nth($brs, 1);
+
+    @each $b in $brs {
+        @if not ($b == $min) {
+            @include grid-respond-to($grid, $b) {
+                width: grid-width($grid, $b) * 1rem;
+            }
+        }
+    }
+}

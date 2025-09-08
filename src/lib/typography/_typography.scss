@@ -1,0 +1,56 @@
+$grid-brockmann-32: (face: $default-face,
+                     breakpoints: min 2 3 4 6,
+                     root-size: 16 * 1.25,
+                     font-size: .8,
+                     line-height: 1,
+                     column-width: 9,
+                     row-height: 6,
+                     min-h-margins: 1,
+                     gutter-width: 1,
+                     gutter-height: 1);
+
+$default-grid: $grid-brockmann-32 !default;
+
+@import 'grid';
+@import 'paragraphs';
+@import 'std-paragraphs';
+@import 'grid-responsive';
+@import 'cells';
+
+%grid-element {
+  // Minimum device width
+  width: 100%;
+
+  display: inline-block;
+  vertical-align: top;
+//  margin-left: 1rem;
+//  overflow: hidden;
+}
+
+%grid-element-strict {
+  @extend %grid-element;
+  overflow: hidden;
+}
+
+%grid-element-bottom-aligned {
+  display: inline-flex;
+  flex-direction: column;
+  justify-content: flex-end;
+}
+
+%grid-page {
+    // Negative margin.
+    margin-left: - 1rem * grid-gutter-width($default-grid);
+}
+
+.txt {
+    // margin-top: grid-ascender-correction($default-grid) * -1rem;
+    position: relative;
+    top: grid-ascender-correction($default-grid) * -1rem;
+}
+
+%not-a-normal-link {
+    text-decoration: none;
+    color: inherit;
+}
+

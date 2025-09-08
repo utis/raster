@@ -1,0 +1,80 @@
+.mwindow-img {
+  // @extend %grid-element-strict;
+  @include cells ($default-grid, 2, $c: 2, $r: 5);
+  position: relative;
+  background-color: black;
+}
+
+.mwindow-behind {
+    // opacity: .7;
+}
+
+.mwindow-img:hover { 
+    .mwindow-behind {
+        // opacity: 1;
+    }
+    .mwindow-reflection {
+        // opacity: .3;
+    }
+}
+
+.mwindow-reflection {
+    position: absolute;
+    top: 0;
+    left: 0;
+    opacity: .5;
+    // mix-blend-mode: lighten;
+}
+
+.mwindow-txt {
+    @include cells ($default-grid, 2, $c: 2, $r: 2);
+    @extend %grid-element;
+}
+
+
+// .mwindow {
+//     transform-style: preserve-3d;
+//     position: relative;
+
+// }
+
+// .mwindow-img {
+//     transform-style: preserve-3d;
+//     position: relative;
+//     // perspective: 1px;
+// }
+
+// body {
+//     perspective: 1px;
+//     height: 100vh;
+//     overflow-x: hidden;
+//     overflow-y: auto;
+// }
+
+// .mwindow-reflection {
+//     transform: translateZ(-2px);
+// }
+
+// @keyframes mtranslateZ(-2px);ove-reflection {
+//   from {
+//       transform: translateY(0);
+//   }
+//   to {
+//       transform: translateY(grid-height($default-grid, 2) * 2rem);
+//   }
+// }
+
+// .mwindow-reflection {
+//     animation: move-reflection linear both;
+//     animation-timeline: view();
+//     animation-range: cover;
+// }
+
+// @media (prefers-reduced-motion: no-preference) {
+//     @supports (animation-timeline: scroll()) {
+
+//         }
+//     }
+// }
+
+

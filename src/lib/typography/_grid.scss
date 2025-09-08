@@ -1,0 +1,205 @@
+
+@function grid-min-h-margins($grid) {
+    @return map-get($grid, min-h-margins);
+}
+
+@function grid-breakpoints($grid) {
+    @return map-get($grid, breakpoints);
+}
+
+@function grid-face($grid) {
+    @return map-get($grid, face);
+}
+
+@function grid-face-family($grid) {
+    @return map-get(map-get($grid, face), font-family);
+}
+
+@function face-family($face) {
+    @return map-get($face, font-family);
+}
+
+@function face-baseline-ratio($face) {
+    @return map-get($face, baseline-ratio);
+}
+
+@function grid-baseline-ratio($grid) {
+    @return map-get(map-get($grid, face), baseline-ratio);
+}
+
+@function face-descender-ratio($face) {
+    @return map-get($face, descender-ratio);
+}
+
+@function grid-descender-ratio($grid) {
+    @return map-get(map-get($grid, face), descender-ratio);
+}
+
+@function face-ascender-ratio($face) {
+    @return map-get($face, ascender-ratio);
+}
+
+@function grid-ascender-ratio($grid) {
+    @return map-get(map-get($grid, face), ascender-ratio);
+}
+
+@function grid-root-size($grid) {
+    @return map-get($grid, root-size);
+}
+
+@function grid-font-size($grid) {
+    @return map-get($grid, font-size);
+}
+
+@function grid-line-height($grid) {
+    @return map-get($grid, line-height);
+}
+
+@function grid-column-width($grid) {
+    @return map-get($grid, column-width);
+}
+
+@function grid-gutter-width($grid) {
+    @return map-get($grid, gutter-width);
+}
+
+@function grid-row-height-raw($grid) {
+    @return map-get($grid, row-height);
+}
+
+@function grid-row-height($grid) {
+    $h: grid-row-height-raw($grid);
+    $asc: grid-ascender-correction($grid);
+    $desc: grid-descender-correction($grid);
+
+    @if $asc {
+        $h: $h - $asc;
+    }
+
+    @if $desc {
+        $h: $h - $desc;
+    }
+
+    @return $h;
+}
+
+@function grid-gutter-height-raw($grid) {
+    @return map-get($grid, gutter-height);
+}
+
+@function grid-gutter-height($grid) {
+    $h: grid-gutter-height-raw($grid);
+    $asc: grid-ascender-correction($grid);
+    $desc: grid-descender-correction($grid);
+
+    @if $asc {
+        $h: $h + $asc;
+    }
+
+    @if $desc {
+        $h: $h + $desc;
+    }
+    
+    @return $h;
+}
+
+@function grid-row-total-height($grid) {
+    // Height of cell and gutter together.
+    @return grid-row-height-raw($grid) + grid-gutter-height-raw($grid);
+}
+
+@function grid-column-total-width($grid) {
+    // Width of cell and gutter together.
+    @return grid-column-width($grid) + grid-gutter-width($grid);
+}
+
+@function grid-width($grid, $n: 1) {
+    $c: grid-column-width($grid);
+    $g: grid-gutter-width($grid);
+    @return $c * $n + $g * ($n - 1);
+}
+
+
+@function grid-height($grid, $n: 1) {
+    $r: grid-row-total-height($grid);
+
+    @return $r * ($n - 1) + grid-row-height($grid);
+}
+
+
+@function grid-baseline-correction($grid, $fsize: false, $lheight: false, $face: false) {
+    $default: 0;
+
+    @if not $fsize {
+        $fsize: grid-font-size($grid);
+    }
+
+    @if not $face {
+        $face: grid-face($grid);
+    }
+
+    @if not $lheight {
+        $lheight: grid-line-height($grid);
+    }
+    
+    $correction: face-baseline-correction($face, $fsize, $lheight);
+    @return $correction;
+}
+
+@function face-baseline-correction($face, $fsize, $lheight: 1) {
+    // Return baseline correction in rem.
+    $bratio: face-baseline-ratio($face);
+
+    $offset: ($fsize * $bratio + $lheight - $fsize) / 2;
+    @return $offset;
+}
+
+@function grid-ascender-correction($grid, $fsize: false, $lheight: false, $face: false) {
+    @if not $fsize {
+        $fsize: grid-font-size($grid);
+    }
+
+    @if not $face {
+        $face: grid-face($grid);
+    }
+
+    @if not $lheight {
+        $lheight: grid-line-height($grid);
+    }
+    
+    $correction: face-ascender-correction($face, $fsize, $lheight);
+    @return $correction;
+}
+
+@function face-ascender-correction($face, $fsize, $lheight: 1) {
+    $aratio: face-ascender-ratio($face);
+
+    $offset: ($fsize * $aratio + $lheight - $fsize) / 2;
+    @return $offset;
+}
+
+@function grid-descender-correction($grid, $fsize: false, $lheight: false, $face: false) {
+    @if not $fsize {
+        $fsize: grid-font-size($grid);
+    }
+
+    @if not $face {
+        $face: grid-face($grid);
+    }
+
+    @if not $lheight {
+        $lheight: grid-line-height($grid);
+    }
+    
+    $correction: face-descender-correction($face, $fsize, $lheight);
+    @return $correction;
+}
+
+@function face-descender-correction($face, $fsize, $lheight: 1) {
+    $dratio: face-descender-ratio($face);
+
+    $offset: ($fsize * $dratio + $lheight - $fsize) / 2;
+    @return $offset;
+}
+
+
