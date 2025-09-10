@@ -7,7 +7,7 @@
     {% for img in page.media.images %}
 
         <div class="sct-four-img__img sct-four-img__img--{{ loop.index }}">
-            {{ img.cropZoom(grid_width(1, true), grid_height(2, true)).grayscale.html | raw }}
+            {#{ img.cropZoom(grid_width(1, true), grid_height(2, true)).grayscale.html | raw }#}
       </div>
 
       {# {% set w_maximum = config.theme.grid.maximum.width %} #}

@@ -1,0 +1,21 @@
+nav li {
+    display: inline-block;
+}
+
+a.logo {
+    @extend %not-a-normal-link;
+}
+
+
+.main-header {
+    @extend %to-bottom-3-1;
+}
+
+.logo {
+    font-weight: bold;
+    @include cells($default-grid, 2, $c: 3);
+}
+
+.main-nav {
+    @include cells($default-grid, 6, $c: 3);
+}

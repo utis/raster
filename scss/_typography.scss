@@ -1,0 +1,15 @@
+// $fonts-dir: '/user/themes/basis/src/lib/font-humanist/';
+// $fonts-dir: '/user/themes/basis/src/lib/font-jost/';
+$fonts-dir: '/user/themes/basis/src/lib/font-lato/';
+// @import '/font-humanist/font-humanist';
+// $default-face: $font-humanist;
+// @import 'font-noto/font-noto-serif';
+// $default-face: $font-noto-serif;
+// @import 'font-jost/font-jost';
+// $default-face: $font-jost;
+@import 'font-lato/font-lato';
+$default-face: $font-lato;
+
+@import 'typography/typography';
+@import 'typography/std-page';
+$line-height: 1;

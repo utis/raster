@@ -18,7 +18,7 @@
                 {#{ dump(grid_height(2, true)) }#}
                 {#{ dump("--- here ---") }#}
                 {#{ dump(img) }#}
-                {{ img.cropZoom(grid_width(2, true), grid_height(2, true)).grayscale.html | raw }}
+                {#{ img.cropZoom(grid_width(2, true), grid_height(2, true)).grayscale.html | raw }#}
                 <!-- <picture>
                      <source media="(min-width: 820px)" srcset="https://picsum.photos/id/27/380/255"
                      <source media="(min-width: 620px)" srcset="https://picsum.photos/id/37/380/050">

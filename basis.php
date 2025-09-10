@@ -22,6 +22,11 @@ class Basis extends Theme
             return;
         }
 
+        $grav = Grav::instance();
+        $themecfg = $grav['config']['theme'];
+        $themedir = $grav['locator']->findResource('theme://', false);
+        dump($themecfg);
+        dump($themedir);
     }
 
     // // Add images to twig template paths to allow inclusion of SVG files
