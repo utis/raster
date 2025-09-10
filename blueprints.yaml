@@ -1,17 +1,17 @@
-name: Basis
-slug: basis
+name: Raster
+slug: raster
 type: theme
 version: 0.1.0
-description: Basis-Theme als Grundlage.
+description: Raster-Theme als Chassis für weitere Themes.
 icon: rebel
 author:
   name: Oliver Utis
   email: oliver.utis@denkbar-ffm.de
-homepage: https://github.com/oliver-utis/grav-theme-basis
+homepage: https://github.com/utis/raster
 demo: http://demo.yoursite.com
 keywords: grav, theme, etc
-bugs: https://github.com/oliver-utis/grav-theme-basis/issues
-readme: https://github.com/oliver-utis/grav-theme-basis/blob/develop/README.md
+bugs: https://github.com/utis/raster/issues
+readme: https://github.com/utis/raster/blob/develop/README.md
 license: MIT
 
 dependencies:
