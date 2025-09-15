@@ -22,11 +22,11 @@ class Raster extends Theme
             return;
         }
 
-        $grav = Grav::instance();
-        $themecfg = $grav['config']['theme'];
-        $themedir = $grav['locator']->findResource('theme://', false);
-        dump($themecfg);
-        dump($themedir);
+        // $grav = Grav::instance();
+        // $themecfg = $grav['config']['theme'];
+        // $themedir = $grav['locator']->findResource('theme://', false);
+        // dump($themecfg);
+        // dump($themedir);
     }
 
     // // Add images to twig template paths to allow inclusion of SVG files
@@ -59,6 +59,10 @@ class Raster extends Theme
     }
 
     public function myFileContents($file) {
-        return file_get_contents($file);
+        if (file_exists($file)) {
+            return file_get_contents($file);
+        } else if ($this->grav['config']->get('system.debugger.enabled')) {
+            return "<!-- File does not exist:" . $file . "-->";
+        }
     }
 }

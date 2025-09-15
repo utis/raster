@@ -5,12 +5,20 @@ dropdown:
 
 typography:
   dir: fonts
+  default: lato-20-9x6
+
   faces:
     - lato
     - noto-serif
+
   grids:
-    default:
+    lato-20-9x6:
       face: lato
+      template: 20-9x6
+
+  templates:
+    20-9x6:
+      breakpoints: min 2 3 4 5 6
       root-size: 20
       font-size: .8
       column-width: 9

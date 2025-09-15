@@ -1,16 +1,34 @@
-IMG-SRC-DIR := src/img
-IMG-TGT-DIR := img
+BASE-THEME := raster
+BASE-THEME-DIR := ../$(BASE-THEME)
 
-SASS-DIR := src/scss
+theme-root := $(PWD)
+
+MK-DIR := $(BASE-THEME-DIR)/lib/mk
+
+
+
+
+IMG-SRC-DIR := images
+IMG-TGT-DIR := images/opt
+
+SASS-DIR := scss
 SASS-EXTENSION := scss
-SASS-LIB-DIR := src/lib/
+SASS-LIB-DIR := lib/
 CSS-DIR := css
 
 SASS-CMD := sassc
 SASS-EXTRA-ARGS :=
 
+GRAV-ROOT := $(shell realpath --no-symlinks $(PWD)/../../..)
+
+
+
+
 # all: img-optimize sass
 all: sass
+
+include $(MK-DIR)/typography.mk
+
 
 ## ---------------------------------------------------------------------------
 # Courtesy of Toby Speight https://codereview.stackexchange.com/users/75307/toby-speight
@@ -81,9 +99,6 @@ sass-inc-dirs := $(SASS-DIR) $(SASS-LIB-DIR)
 nullstring :=
 space := $(nullstring) # end of line
 sass-inc-path := $(subst $(space),:,$(sass-inc-dirs))
-
-test:
-	@echo $(sass-inc-path)
 
 vpath %.scss $(sass-inc-dirs)
 
