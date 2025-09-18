@@ -1,9 +1,9 @@
-BASE-THEME := raster
-BASE-THEME-DIR := ../$(BASE-THEME)
+base-theme-name := raster
+base-theme-dir := ../$(base-theme-name)
 
 theme-root := $(PWD)
 
-MK-DIR := $(BASE-THEME-DIR)/lib/mk
+MK-DIR := $(base-theme-dir)/lib/mk
 
 
 
@@ -19,13 +19,13 @@ CSS-DIR := css
 SASS-CMD := sassc
 SASS-EXTRA-ARGS :=
 
-GRAV-ROOT := $(shell realpath --no-symlinks $(PWD)/../../..)
+grav-root := $(shell realpath --no-symlinks $(PWD)/../../..)
 
 
 
 
 # all: img-optimize sass
-all: sass
+all: sass typography
 
 include $(MK-DIR)/typography.mk
 

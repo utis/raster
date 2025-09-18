@@ -9,7 +9,7 @@ typography:
 
   faces:
     - lato
-    - noto-serif
+    - humanist
 
   grids:
     lato-20-9x6:
