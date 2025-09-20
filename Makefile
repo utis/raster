@@ -2,6 +2,8 @@ base-theme-name := raster
 base-theme-dir := ../$(base-theme-name)
 
 theme-root := $(PWD)
+theme-name := $(notdir $(theme-root))
+
 
 MK-DIR := $(base-theme-dir)/lib/mk
 
@@ -25,7 +27,7 @@ grav-root := $(shell realpath --no-symlinks $(PWD)/../../..)
 
 
 # all: img-optimize sass
-all: sass typography
+all: typography sass
 
 include $(MK-DIR)/typography.mk
 
@@ -127,5 +129,6 @@ watch:
 ## ---------------------------------------------------------------------------
 ## CLEAN
 
-clean:
+.PHONY: clean
+clean: typography-clean
 	rm -f $(sass-tgts)

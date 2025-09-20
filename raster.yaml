@@ -10,6 +10,7 @@ typography:
   faces:
     - lato
     - humanist
+    - jost
 
   grids:
     lato-20-9x6:
