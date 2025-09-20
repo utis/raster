@@ -1,5 +1,4 @@
 FONTS-DIR := fonts
-TYPO-SASS-DIR := build/scss
 SASS-DEP-DIR := build/d
 
 theme-cfg := $(theme-name).yaml
@@ -45,4 +44,4 @@ $(foreach f,$(grids),$(eval $(call grids_TEMPLATE,$f)))
 
 .PHONY: typography-clean
 typography-clean:
-	rm $(TYPO-SASS-DIR)/*
+	rm -f $(TYPO-SASS-DIR)/*
